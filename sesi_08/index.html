@@ -79,7 +79,7 @@
     }
 
     /* Modal Popup Styling */
-.modal {
+    .modal {
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -87,10 +87,12 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .modal-content {
     background-color: white;
@@ -185,7 +187,7 @@
         <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
 
     <dotlottie-player src="https://lottie.host/1bafdb96-6409-483b-9c58-a7d070a1a418/LMAUHIbH8p.json" background="transparent" speed="1" style="width: 200px; height: 200px; margin: -25px auto; z-index: 1;" loop autoplay></dotlottie-player>
-        <h6>Apakah Anda ingin melanjutkan membuka portofolio?</h6>
+        <h6>Apakah Anda ingin melanjutkan melihat portofolio saya?</h6>
         <button id="continueBtn" class="btn tj-btn-primary">Lanjutkan</button>
     </div>
 </div>
