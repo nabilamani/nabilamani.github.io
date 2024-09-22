@@ -91,6 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: opacity 0.5s ease;
 }
 
 
@@ -915,33 +916,39 @@
                 // Hide preloader
                 document.querySelector(".preloader").style.display = "none";
 
-                // Show popup modal after preloader
-                document.getElementById("portfolioPopup").style.display = "flex";
+                // Show popup modal with a dissolve effect
+                const popup = document.getElementById("portfolioPopup");
+                popup.style.opacity = 0;
+                popup.style.display = "flex"; // Make it visible first
+
+                // Add dissolve transition
+                setTimeout(() => {
+                    popup.style.transition = "opacity 0.5s ease";
+                    popup.style.opacity = 1; // Fade in
+                }, 10); // Slight delay for transition to take effect
             }, 2000); // Adjust the timeout duration to match your preloader duration
         };
 
         // Continue button event listener
         document.getElementById("continueBtn").addEventListener("click", function () {
-            // Hide the modal
-            document.getElementById("portfolioPopup").style.display = "none";
+            // Fade out the modal
+            const popup = document.getElementById("portfolioPopup");
+            popup.style.opacity = 0;
 
-            // Play the audio
-            var audio = document.getElementById("portfolioAudio");
-            audio.play();
+            // Wait for the transition to finish before hiding
+            setTimeout(() => {
+                popup.style.display = "none"; // Hide it after fading out
 
-            // Mark popup as shown in sessionStorage (for this session only)
-            sessionStorage.setItem("popupShown", "true");
-
-            // After a small delay to let the audio start, reload the page
-            setTimeout(function () {
-                location.reload(); // This will restart the page
-            }, 500); // Adjust the delay if necessary (500 ms in this case)
+                // Mark popup as shown in sessionStorage (for this session only)
+                sessionStorage.setItem("popupShown", "true");
+            }, 500); // Match this to the transition duration
         });
     } else {
         // If the popup has already been shown, skip directly to the portfolio section
         window.location.href = "#portfolio"; // Redirect to the portfolio section
     }
 });
+
 
 
     </script>
