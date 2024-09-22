@@ -78,6 +78,38 @@
         color: #f00;
     }
 
+    /* Modal Popup Styling */
+.modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 60%;
+
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content h6 {
+    margin-bottom: 20px;
+    color: #8750F7;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+}
+
     @media only screen and (max-width: 768px) {
         .load-text span {
             font-size: 10px;
@@ -120,32 +152,50 @@
 <body>
 
     <!-- Preloader Area Start -->
-    <div class="preloader">
-        <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
-            <path id="preloaderSvg" d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"></path>
-        </svg>
+<div class="preloader">
+    <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+        <path id="preloaderSvg" d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"></path>
+    </svg>
 
-        <div class="preloader-heading">
-            <div class="load-text">
-                <span>A</span>
-                <span>S</span>
-                <span>S</span>
-                <span>A</span>
-                <span>L</span>
-                <span>A</span>
-                <span>M</span>
-                <span>U</span>
-                <span>A</span>
-                <span>L</span>
-                <span>A</span>
-                <span>I</span>
-                <span>K</span>
-                <span>U</span>
-                <span>M</span>
-            </div>
+    <div class="preloader-heading">
+        <div class="load-text">
+            <span>A</span>
+            <span>S</span>
+            <span>S</span>
+            <span>A</span>
+            <span>L</span>
+            <span>A</span>
+            <span>M</span>
+            <span>U</span>
+            <span>A</span>
+            <span>L</span>
+            <span>A</span>
+            <span>I</span>
+            <span>K</span>
+            <span>U</span>
+            <span>M</span>
         </div>
     </div>
-    <!-- Preloader Area End -->
+</div>
+<!-- Preloader Area End -->
+
+<!-- Popup Modal Start -->
+<div id="portfolioPopup" class="modal" style="display: none;">
+    <div class="modal-content">
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+    <dotlottie-player src="https://lottie.host/1bafdb96-6409-483b-9c58-a7d070a1a418/LMAUHIbH8p.json" background="transparent" speed="1" style="width: 200px; height: 200px; margin: -25px auto; z-index: 1;" loop autoplay></dotlottie-player>
+        <h6>Apakah Anda ingin melanjutkan membuka portofolio?</h6>
+        <button id="continueBtn" class="btn tj-btn-primary">Lanjutkan</button>
+    </div>
+</div>
+<!-- Popup Modal End -->
+
+<!-- Audio Element (Hidden) -->
+<audio id="portfolioAudio" style="display: none;">
+    <source src="assets/music/musik2.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
 
     <!-- start: Back To Top -->
@@ -851,6 +901,47 @@
         function closePortfolioAlert() {
             document.getElementById("portfolio-alert").style.display = "none";
         }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Check if popup has already been shown in the current session
+    if (!sessionStorage.getItem("popupShown")) {
+        // Once preloader is finished
+        window.onload = function () {
+            // Simulate preloader end by waiting for 2 seconds
+            setTimeout(function () {
+                // Hide preloader
+                document.querySelector(".preloader").style.display = "none";
+
+                // Show popup modal after preloader
+                document.getElementById("portfolioPopup").style.display = "flex";
+            }, 2000); // Adjust the timeout duration to match your preloader duration
+        };
+
+        // Continue button event listener
+        document.getElementById("continueBtn").addEventListener("click", function () {
+            // Hide the modal
+            document.getElementById("portfolioPopup").style.display = "none";
+
+            // Play the audio
+            var audio = document.getElementById("portfolioAudio");
+            audio.play();
+
+            // Mark popup as shown in sessionStorage (for this session only)
+            sessionStorage.setItem("popupShown", "true");
+
+            // After a small delay to let the audio start, reload the page
+            setTimeout(function () {
+                location.reload(); // This will restart the page
+            }, 500); // Adjust the delay if necessary (500 ms in this case)
+        });
+    } else {
+        // If the popup has already been shown, skip directly to the portfolio section
+        window.location.href = "#portfolio"; // Redirect to the portfolio section
+    }
+});
+
+
     </script>
 </body>
 
