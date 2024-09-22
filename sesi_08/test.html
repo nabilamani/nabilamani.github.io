@@ -24,7 +24,28 @@
     colors="primary:#8750f7,secondary:#8750f7"
     style="width:250px;height:250px">
 </lord-icon>
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keluar dan Buka di Browser Luar</title>
+    <script>
+        function openInNewTab(url) {
+            const newTab = window.open(url, '_blank');
+            if (newTab) {
+                newTab.focus();
+            } else {
+                alert('Silakan izinkan popup untuk membuka tab baru.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Selamat datang!</h1>
+    <button onclick="openInNewTab('https://www.chrome.com')">Buka di Browser Luar</button>
+</body>
+</html>
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
 
     <dotlottie-player src="https://lottie.host/193d5dff-d71c-4a78-9f31-2dfe691f9348/y1nn0jVD1w.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
